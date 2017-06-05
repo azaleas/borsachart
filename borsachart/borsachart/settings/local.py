@@ -30,8 +30,12 @@ MIDDLEWARE.append('borsachart.middleware.dev_cors_middleware')
 # Database
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'borsachart',
+        'USER': get_secret('DB_USER', DEBUG),
+        'PASSWORD': get_secret('DB_PASSWORD', DEBUG),
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
  
