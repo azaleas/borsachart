@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.conf import settings
 
 urlpatterns = [
+    url(r'^api/v1/', include('charts.api.urls', namespace='api')),
     url(r'^bc60_admin/', admin.site.urls),
 ]
 
