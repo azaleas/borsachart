@@ -1,5 +1,5 @@
 # Helper functions for API
-
+import json
 import time
 from datetime import date, timedelta, datetime
 
@@ -28,7 +28,7 @@ def get_ticker_data(ticker):
             "ticker": ticker,
             "data": ticker_data
         }
-        return ticker_data_combined
+        return json.dumps(ticker_data_combined)
 
 def get_ticker_data_quandl(ticker):
     """

@@ -46,6 +46,17 @@ SECRET_KEY = get_secret('SECRET_KEY', DEBUG)
 EMAIL_HOST = 'localhost'
 EMAIL_PORT = 1025
 
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "asgi_redis.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [(get_secret('REDIS_HOST', DEBUG), 
+                get_secret('REDIS_PORT', DEBUG))],
+        },
+        "ROUTING": "charts.routing.channel_routing",
+    },
+}
+
 # LOGIN_REDIRECT_URL = 'http://localhost:3000/'
  
 #########################################################
