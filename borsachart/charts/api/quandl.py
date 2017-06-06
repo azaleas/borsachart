@@ -19,3 +19,4 @@ def get_ticker(ticker, start_date, end_date):
 
     ticker_data = requests.request('GET', api_url)
     ticker_data_json = ticker_data.json()
+    return ticker_data_json

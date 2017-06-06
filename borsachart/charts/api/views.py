@@ -26,6 +26,6 @@ class ChartsViewSet(viewsets.ViewSet):
             if serializer.is_valid():
                 ticker = request.data['ticker']
                 json_data = get_ticker_data(ticker)
-                return Response(ticker, status.HTTP_200_OK)
+                return Response(json_data, status.HTTP_200_OK)
             else:
                 return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)

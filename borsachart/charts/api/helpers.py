@@ -24,6 +24,11 @@ def get_ticker_data(ticker):
         pass
     else:
         ticker_data = get_ticker_data_quandl(ticker)
+        ticker_data_combined = {
+            "ticker": ticker,
+            "data": ticker_data
+        }
+        return ticker_data_combined
 
 def get_ticker_data_quandl(ticker):
     """
@@ -32,3 +37,4 @@ def get_ticker_data_quandl(ticker):
     start_date = (timezone.now() - timedelta(days=365)).strftime("%Y%m%d")
     end_date = timezone.now().strftime("%Y%m%d")
     ticker_quandl_data = get_ticker(ticker, start_date, end_date)
+    return ticker_quandl_data
