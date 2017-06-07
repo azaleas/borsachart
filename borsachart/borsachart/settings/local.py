@@ -46,12 +46,14 @@ SECRET_KEY = get_secret('SECRET_KEY', DEBUG)
 EMAIL_HOST = 'localhost'
 EMAIL_PORT = 1025
 
+REDIS_HOST = get_secret('REDIS_HOST', DEBUG)
+REDIS_PORT = get_secret('REDIS_PORT', DEBUG)
+
 CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "asgi_redis.RedisChannelLayer",
         "CONFIG": {
-            "hosts": [(get_secret('REDIS_HOST', DEBUG), 
-                get_secret('REDIS_PORT', DEBUG))],
+            "hosts": [(REDIS_HOST, REDIS_PORT)],
         },
         "ROUTING": "charts.routing.channel_routing",
     },

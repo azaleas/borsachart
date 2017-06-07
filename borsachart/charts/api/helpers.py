@@ -1,13 +1,19 @@
 # Helper functions for API
 import json
 import time
+import redis
 from datetime import date, timedelta, datetime
 
+from django.conf import settings
 from django.utils import timezone
+from channels import Group
 
 from ..models import Ticker
-
 from .quandl import get_ticker
+
+
+r = redis.StrictRedis(host=settings.REDIS_HOST,
+                    port=settings.REDIS_PORT)
 
 def get_ticker_data(ticker):
     """
@@ -38,3 +44,17 @@ def get_ticker_data_quandl(ticker):
     end_date = timezone.now().strftime("%Y%m%d")
     ticker_quandl_data = get_ticker(ticker, start_date, end_date)
     return ticker_quandl_data
+
+def send_redis_data():
+    """
+    Collect all tickers in Redis DB and send them over via websocket
+    """
+    total_tickers = []
+    for ticker in r.scan_iter(match='ticker:*'):
+        redis_data = r.get("ticker:v:data")
+        data = json.loads(redis_data.decode('utf-8'))
+        total_tickers.append(data)
+
+    Group('charts').send({
+        "text": json.dumps(total_tickers)
+    })
