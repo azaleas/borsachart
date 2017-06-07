@@ -1,9 +1,4 @@
 from rest_framework import serializers
 
-from ..models import Ticker
-
-class TickerSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        model = Ticker
-        fields = ['id', 'ticker']
+class TickerSerializer(serializers.Serializer):
+    ticker = serializers.CharField(max_length=300)
