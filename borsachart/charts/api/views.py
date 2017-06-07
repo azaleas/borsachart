@@ -1,14 +1,16 @@
-import redis
+import json
+
 from django.conf import settings
 from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework.decorators import detail_route, list_route
+import redis
 from channels import Group
 
 from ..models import Ticker
 from .serializers import TickerSerializer
 
-from .helpers import get_ticker_data, send_redis_data
+from .helpers import get_ticker_data, send_redis_data, initial_client_connect
 
 r = redis.StrictRedis(host=settings.REDIS_HOST,
                     port=settings.REDIS_PORT)
@@ -37,3 +39,8 @@ class ChartsViewSet(viewsets.ViewSet):
                 return Response("ok", status.HTTP_200_OK)
             else:
                 return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)
+
+    @list_route(methods=['get'])
+    def first_connect(self, request):
+        return Response(initial_client_connect(), status.HTTP_200_OK)
+ 
