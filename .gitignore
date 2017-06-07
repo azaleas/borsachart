@@ -120,5 +120,5 @@ nb-configuration.xml
 *.~
 
 # React project
-!stipo/frontend/env
-!stipo/frontend/build
+!borsachart/frontend/env
+!borsachart/frontend/build
