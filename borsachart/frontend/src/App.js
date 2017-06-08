@@ -20,6 +20,11 @@ class App extends Component {
             console.log(data);
         });
 
+        ws.addEventListener('open', () => {
+            // send ticker name for deletion
+            ws.send('v');
+        });
+
         ws.onerror = (err) => {
             if (err.code === 'EHOSTDOWN') {
                 console.log('server down');
