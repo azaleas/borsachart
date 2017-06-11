@@ -27,6 +27,7 @@ class ChartsViewSet(viewsets.ViewSet):
     @list_route(methods=['post', 'get'])
     def searchticker(self, request):
         if request.method == 'GET':
+            r.flushall()
             return Response('Search for ticker...', status.HTTP_200_OK)
         else:
             serializer = TickerSerializer(data=request.data)
@@ -34,7 +35,6 @@ class ChartsViewSet(viewsets.ViewSet):
                 ticker = (request.data['ticker']).lower()
                 json_data = get_ticker_data(ticker)
                 if json_data == 'not found':
-                    r.flushall()
                     return Response("not found", status.HTTP_404_NOT_FOUND)
                 else:
                     r.set('ticker:{}:data'.format(ticker), json_data)

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
-import VARIABLES from './utils/variables';
+import VARIABLES from './../utils/variables';
+import api from './../utils/Api';
 
-import logo from './logo.svg';
-import './App.css';
+import ChartComponent from './../components/ChartComponent';
 
 const WebSocket = require('reconnecting-websocket');
 
@@ -11,18 +11,23 @@ const ws_scheme = window.location.protocol === 'https' ? 'wss' : 'ws';
 const ws_path = ws_scheme + '://' + VARIABLES.URL;
 const ws = new WebSocket(ws_path);
 
-class App extends Component {
+class ChartsContainer extends Component {
+    
+    constructor(props) {
+        super(props);
+    
+        this.state = {
+            data: [],
+        };
+    }
 
     componentDidMount(){
 
         ws.addEventListener('message', (event) =>{
             let data = JSON.parse(event.data);
-            console.log(data);
-        });
-
-        ws.addEventListener('open', () => {
-            // send ticker name for deletion
-            ws.send('v');
+            this.setState({
+                data,
+            });
         });
 
         ws.onerror = (err) => {
@@ -36,6 +41,18 @@ class App extends Component {
                 console.log(err.code);
             }
         };
+
+        api.fetchFirstData()
+            .then((response) => {
+                this.setState({
+                    data: response,
+                });
+            })
+        /*ws.addEventListener('open', () => {
+            // send ticker name for deletion
+            ws.send('v');
+        });*/
+
     }
 
     componentWillUnmount(){
@@ -55,17 +72,16 @@ class App extends Component {
 
     render() {
         return (
-            <div className="App">
-                <div className="App-header">
-                    <img src={logo} className="App-logo" alt="logo" />
-                    <h2>Welcome to React</h2>
+            <div>
+                <div className="graph-container">
+                    <ChartComponent data={this.state.data} />
                 </div>
-                <p className="App-intro">
-                    To get started, edit <code>src/App.js</code> and save to reload.
-                </p>
+                <div className="input-container">
+
+                </div>
             </div>
         );
     }
 }
 
-export default App;
+export default ChartsContainer;

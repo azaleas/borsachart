@@ -34,10 +34,15 @@ def get_ticker_data(ticker):
     except ObjectDoesNotExist:
         ticker_data = get_ticker_data_quandl(ticker)
         if ticker_data['datatable']['data']:
-            Ticker.objects.update_or_create(
-                ticker=ticker,
-                ticker_data=ticker_data
-            )
+            try:
+                ticker = Ticker.objects.get(ticker=ticker)
+                ticker.ticker_data = ticker_data
+                ticker.save()
+            except ObjectDoesNotExist:
+                Ticker.objects.create(
+                    ticker=ticker,
+                    ticker_data=ticker_data
+                )
         else:
             return "not found"
 
@@ -97,10 +102,10 @@ def remove_ticker_redis(ticker):
         ticker_list = ast.literal_eval(ticker_list.decode('utf-8'))
         try:
             ticker_list.remove(ticker)
+            r.set('ticker_list', ticker_list)
+            send_redis_data()
         except:
             pass
-        r.set('ticker_list', ticker_list)
-    send_redis_data()
 
 def ticker_list(ticker):
     ticker_list = r.get('ticker_list')

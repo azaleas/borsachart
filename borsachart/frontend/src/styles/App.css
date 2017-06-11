@@ -1,0 +1,28 @@
+.container {
+    /*width: 100%;*/
+    position: relative;
+    max-width: 94%;
+    max-width: 94vw;
+    margin: 1vh auto;
+    padding: 1vh 15px;
+    height: 96%;
+    height: 96vh;
+    -webkit-box-shadow: 1px 1px 2px 1px #ccc;
+            box-shadow: 1px 1px 2px 1px #ccc;
+    -webkit-border-radius: 5px;
+            border-radius: 5px;
+}
+
+.graph-container {
+    height: 60%;
+    height: 60vh;
+}
+
+div[id^='highcharts-']{
+    height: 60vh !important;
+}
+
+.input-container {
+    height: 35%;
+    height: 35vh;
+}
