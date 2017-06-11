@@ -4,6 +4,7 @@ import VARIABLES from './../utils/variables';
 import api from './../utils/Api';
 
 import ChartComponent from './../components/ChartComponent';
+import InputComponent from './../components/InputComponent';
 
 const WebSocket = require('reconnecting-websocket');
 
@@ -18,6 +19,8 @@ class ChartsContainer extends Component {
     
         this.state = {
             data: [],
+            input: '',
+            inputError: false,
         };
     }
 
@@ -70,15 +73,45 @@ class ChartsContainer extends Component {
         };
     }
 
+    onInputChange = (event) =>{
+        this.setState({
+            input: event.target.value,
+            inputError: false,
+        });
+    }
+
+    onInputSubmit = (event) =>{
+        this.searchSubmit();
+    }
+
+    handleKeyDown = (event) =>{
+        if (event.key === "Enter"){
+            this.searchSubmit();
+        }
+    }
+
+    searchSubmit(){
+        if (!this.state.input){
+            this.setState({
+                inputError: true,
+            })
+        }
+        else{
+            api.searchTicker(this.state.input);
+        }
+    }
+
     render() {
         return (
             <div>
-                <div className="graph-container">
-                    <ChartComponent data={this.state.data} />
-                </div>
-                <div className="input-container">
-
-                </div>
+                <ChartComponent data={this.state.data} />
+                <InputComponent 
+                    data={this.state.data}
+                    inputValue={this.state.input}
+                    inputError={this.state.inputError}
+                    onInputChange={this.onInputChange}
+                    handleKeyDown={this.handleKeyDown}
+                    onInputSubmit={this.onInputSubmit} />
             </div>
         );
     }

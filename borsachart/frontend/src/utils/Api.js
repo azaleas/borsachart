@@ -1,38 +1,35 @@
 import axios from 'axios';
+import Cookies from 'universal-cookie';
 
 const API_STEM = '/api/v1';
+const cookies = new Cookies();
 
 class Api{
 
     fetchFirstData(){
-        let URL = `${API_STEM}/charts/first_connect`;
+        let URL = `${API_STEM}/charts/first_connect/`;
         return axios.get(URL)
             .then((response) => response.data)
             .catch((error) => {
                 console.warn("Error in fetchFirstData", error);
             });
     }
-
-    postVote(quesitonId, choiceId){
-        let URL = `${API_STEM}/polls/${quesitonId}/vote/`;
-        let config = {};
-
-        if(this.isLoggedIn()){
-            config = {
-                headers: {"Authorization": "Token " + this.token},
-            };
-        }
-
+    
+    searchTicker(ticker){
+        let URL = `${API_STEM}/charts/searchticker/`;
         return axios.post(
                 URL, 
                 {
-                    "question": quesitonId,
-                    "choice": choiceId,
+                    ticker
                 },
-                config
+                {
+                    headers: {
+                        'X-CSRFToken': cookies.get('csrftoken'),
+                    }
+                }
             )
             .then((response) => {
-                return response.data.data.question;
+                console.log(response);
             })
             .catch((error) => {
                 console.warn(error);

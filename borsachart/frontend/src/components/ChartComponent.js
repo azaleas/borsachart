@@ -6,7 +6,6 @@ import moment from 'moment';
 import ReactHighstock from 'react-highcharts/ReactHighstock';
 
 const ChartComponent = (props) => {
-    console.log(props.data);
     let data_configured = [];
     if (props.data.length > 0){
         data_configured = props.data.map((el, index) => (
@@ -17,7 +16,7 @@ const ChartComponent = (props) => {
                 },
                 data: el.data.datatable.data.map((el, index) => {
                     return(
-                        [(new Date(moment(el[1])).getTime()), el[2]]
+                        [(new Date(moment(el[1])).getTime()), el[5]]
                     )
                 })
             }
@@ -44,7 +43,7 @@ const ChartComponent = (props) => {
         }
     }
     return (
-       <div>
+       <div className="graph-container">
             <ReactHighstock 
                 config={config}
             />
