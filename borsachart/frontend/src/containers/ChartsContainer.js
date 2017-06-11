@@ -21,6 +21,7 @@ class ChartsContainer extends Component {
             data: [],
             input: '',
             inputError: false,
+            notFound: false,
         };
     }
 
@@ -77,6 +78,7 @@ class ChartsContainer extends Component {
         this.setState({
             input: event.target.value,
             inputError: false,
+            notFound: false,
         });
     }
 
@@ -97,7 +99,14 @@ class ChartsContainer extends Component {
             })
         }
         else{
-            api.searchTicker(this.state.input);
+            api.searchTicker(this.state.input)
+                .then((response) => {
+                    if(response === 404){
+                        this.setState({
+                            notFound: true,
+                        })
+                    }
+                })
         }
     }
 
@@ -109,6 +118,7 @@ class ChartsContainer extends Component {
                     data={this.state.data}
                     inputValue={this.state.input}
                     inputError={this.state.inputError}
+                    notFound={this.state.notFound}
                     onInputChange={this.onInputChange}
                     handleKeyDown={this.handleKeyDown}
                     onInputSubmit={this.onInputSubmit} />

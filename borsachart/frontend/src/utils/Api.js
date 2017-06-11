@@ -28,10 +28,10 @@ class Api{
                     }
                 }
             )
-            .then((response) => {
-                console.log(response);
-            })
             .catch((error) => {
+                if(error.response.status === 404){
+                    return error.response.status;
+                }
                 console.warn(error);
             })
     }

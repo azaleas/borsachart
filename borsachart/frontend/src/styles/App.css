@@ -105,3 +105,20 @@ div[id^='highcharts-']{
 .block-form-submit:hover {
     background-color: purple;
 }
+
+.notfound {
+    font-size: 0.8em;
+    margin: 10px auto;
+    text-align: center;
+    display: block;
+    width: 100%;
+    position: relative;
+    max-width: 200px;
+    padding: 5px 10px;
+    background-color: pink;
+    opacity: 0;
+    color: #fff;
+}
+.notfound.show{
+    opacity: 1;
+}

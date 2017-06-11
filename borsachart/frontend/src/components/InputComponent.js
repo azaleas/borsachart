@@ -30,6 +30,9 @@ const InputComponent = (props) => {
                         className="block-form-submit"
                         onClick={props.onInputSubmit}/>
                 </div>
+                <p className={"notfound " + (props.notFound ? "show" : "")} >
+                    Ticker not found.<br/>Try again.
+                </p>
             </div>
             <div className="inputs-block column">
                 hello
@@ -45,6 +48,7 @@ InputComponent.propTypes = {
     handleKeyDown: PropTypes.func,
     inputValue: PropTypes.string,
     inputError: PropTypes.bool,
+    notFound: PropTypes.bool,
 };
 
 export default InputComponent;
