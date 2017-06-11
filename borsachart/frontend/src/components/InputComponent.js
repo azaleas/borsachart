@@ -48,7 +48,9 @@ const InputComponent = (props) => {
                                     <div className="ticker-text">
                                         <h4 className="ticker-text--title">{el.ticker}</h4>
                                         <hr/>
-                                        <h5 className="ticker-text--latestdata">Latest data:</h5>
+                                        <h5 className="ticker-text--latestdata">
+                                            Latest data ({el.data.datatable.data[lastColumn][1]}):
+                                        </h5>
                                         <div className="ticker-text--data">
                                             <p className="ticker-text--info">
                                                 Open: {el.data.datatable.data[lastColumn][2]}
@@ -57,13 +59,13 @@ const InputComponent = (props) => {
                                                 High: {el.data.datatable.data[lastColumn][3]}
                                             </p>
                                             <p className="ticker-text--info">
-                                                Low: {el.data.datatable.data[lastColumn][4]}
+                                                Volume: {el.data.datatable.data[lastColumn][6]}
                                             </p>
                                             <p className="ticker-text--info">
                                                 Close: {el.data.datatable.data[lastColumn][5]}
                                             </p>
                                             <p className="ticker-text--info">
-                                                Volume: {el.data.datatable.data[lastColumn][6]}
+                                                Low: {el.data.datatable.data[lastColumn][4]}
                                             </p>
                                         </div>
                                         <p className="ticker--remove btn">Remove</p>
