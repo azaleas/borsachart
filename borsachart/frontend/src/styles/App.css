@@ -194,7 +194,8 @@ div[id^='highcharts-']{
 }
 
 .ticker--remove {
-    padding: 5px 10px;
+    margin: 1.15em 0 0;
+    padding: 7px 20px;
     background-color: #ff4040;
     display: block;
     max-width: 100px;

@@ -26,7 +26,6 @@ class ChartsContainer extends Component {
     }
 
     componentDidMount(){
-
         ws.addEventListener('message', (event) =>{
             let data = JSON.parse(event.data);
             this.setState({
@@ -51,12 +50,7 @@ class ChartsContainer extends Component {
                 this.setState({
                     data: response,
                 });
-            })
-        /*ws.addEventListener('open', () => {
-            // send ticker name for deletion
-            ws.send('v');
-        });*/
-
+            });
     }
 
     componentWillUnmount(){
@@ -110,6 +104,10 @@ class ChartsContainer extends Component {
         }
     }
 
+    onRemove = (ticker) => {
+        ws.send(ticker);
+    }
+
     render() {
         return (
             <div>
@@ -120,6 +118,7 @@ class ChartsContainer extends Component {
                     inputError={this.state.inputError}
                     notFound={this.state.notFound}
                     onInputChange={this.onInputChange}
+                    onRemove={this.onRemove}
                     handleKeyDown={this.handleKeyDown}
                     onInputSubmit={this.onInputSubmit} />
             </div>

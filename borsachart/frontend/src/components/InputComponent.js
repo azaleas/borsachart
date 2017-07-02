@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const InputComponent = (props) => {
-    console.log(props.data);
     return (
        <div className="input-container">
             <div className="input-block column">
@@ -39,7 +38,6 @@ const InputComponent = (props) => {
                     {
                         props.data.map((el, index) => {
                             let lastColumn = el.data.datatable.data.length - 1;
-                            console.log(lastColumn);
                             return(
                                 <div 
                                     key={index}
@@ -68,7 +66,14 @@ const InputComponent = (props) => {
                                                 Low: {el.data.datatable.data[lastColumn][4]}
                                             </p>
                                         </div>
-                                        <p className="ticker--remove btn">Remove</p>
+                                        <input 
+                                            type="button"
+                                            value="Remove"
+                                            onClick={()=>{
+                                                props.onRemove(el.ticker);
+                                            }}
+                                            className="ticker--remove btn"
+                                        />
                                     </div>
                                 </div>
                             )
@@ -84,6 +89,7 @@ InputComponent.propTypes = {
     data: PropTypes.array,
     onInputChange: PropTypes.func,
     onInputSubmit: PropTypes.func,
+    onRemove: PropTypes.func,
     handleKeyDown: PropTypes.func,
     inputValue: PropTypes.string,
     inputError: PropTypes.bool,

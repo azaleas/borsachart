@@ -13,6 +13,5 @@ def ws_message(message):
     ticker = message['text']
     remove_ticker_redis(ticker)
 
-
 def ws_disconnect(message):
     Group('charts').discard(message.reply_channel)
