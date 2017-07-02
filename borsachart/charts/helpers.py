@@ -35,9 +35,9 @@ def get_ticker_data(ticker):
         ticker_data = get_ticker_data_quandl(ticker)
         if ticker_data['datatable']['data']:
             try:
-                ticker = Ticker.objects.get(ticker=ticker)
-                ticker.ticker_data = ticker_data
-                ticker.save()
+                tickerObject = Ticker.objects.get(ticker=ticker)
+                tickerObject.ticker_data = ticker_data
+                tickerObject.save()
             except ObjectDoesNotExist:
                 Ticker.objects.create(
                     ticker=ticker,
@@ -46,10 +46,12 @@ def get_ticker_data(ticker):
         else:
             return "not found"
 
+
     ticker_data_combined = {
         "ticker": ticker,
         "data": ticker_data
     }
+
     return json.dumps(ticker_data_combined)
 
 def get_ticker_data_quandl(ticker):
