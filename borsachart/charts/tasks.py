@@ -27,7 +27,7 @@ def check_redis_db():
     Check redis db every hour. 
     Update tickers which are older than 24 hours
     """
-    print('hello world')
+    print('updating old tickers')
     date_cached = timezone.now() - timedelta(days=1)
     updated = False
     for ticker in r.scan_iter(match='ticker:*'):    
@@ -41,15 +41,23 @@ def check_redis_db():
         except ObjectDoesNotExist:
             updated = True
             ticker_data = get_ticker_data_quandl(ticker_clean)
-            Ticker.objects.update_or_create(
-                ticker=ticker_clean,
-                ticker_data=ticker_data
-            )
-
+            
+            if ticker_data['datatable']['data']:
+                try:
+                    tickerObject = Ticker.objects.get(ticker=ticker)
+                    tickerObject.ticker_data = ticker_data
+                    tickerObject.save()
+                except ObjectDoesNotExist:
+                    Ticker.objects.create(
+                        ticker=ticker,
+                        ticker_data=ticker_data
+                    )
+            
             ticker_data_combined = {
                 "ticker": ticker_clean,
                 "data": ticker_data
             }
             r.set('ticker:{}:data'.format(ticker_clean), json.dumps(ticker_data_combined))
     if updated:
+        updated = False
         send_redis_data()
