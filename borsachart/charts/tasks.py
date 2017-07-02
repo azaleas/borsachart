@@ -52,12 +52,16 @@ def check_redis_db():
                         ticker=ticker,
                         ticker_data=ticker_data
                     )
-            
-            ticker_data_combined = {
-                "ticker": ticker_clean,
-                "data": ticker_data
-            }
-            r.set('ticker:{}:data'.format(ticker_clean), json.dumps(ticker_data_combined))
+            else:
+                return "not found"
+
+        ticker_data_combined = {
+            "ticker": ticker_clean,
+            "data": ticker_data
+        }
+
+        r.set('ticker:{}:data'.format(ticker_clean), json.dumps(ticker_data_combined))
+        
     if updated:
         updated = False
         send_redis_data()
