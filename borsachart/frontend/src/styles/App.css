@@ -202,3 +202,58 @@ div[id^='highcharts-']{
     font-size: 0.8em;
     text-align: center;
 }
+
+@media only screen and (max-width: 1279px){
+    .inputs-block {
+        -webkit-flex: 6;
+            -ms-flex: 6;
+                flex: 6;
+    }
+
+    .ticker {
+        width: 48%;
+        padding: 0 1%;
+    }
+}
+
+@media only screen and (max-width: 945px){
+    .inputs-block {
+        -webkit-flex: 4;
+            -ms-flex: 4;
+                flex: 4;
+    }
+    .ticker {
+        width: 98%;
+        padding: 0 1%;
+        margin: auto;
+    }
+}
+
+@media only screen and (max-width: 743px){
+    .input-container {
+        display: block;
+        overflow: auto;
+    }
+    .input-block {
+        display: block;
+    }
+    .inputs-block {
+       display: block;
+    }
+    .block-title {
+        margin-top: 1em;
+    }
+    .ticker {
+        max-width: 400px;
+    }
+    .tickers {
+        height: auto;
+        margin-bottom: 1em;
+    }
+}
+
+@media only screen and (max-width: 330px){
+    body {
+        font-size: 12px !important;
+    }
+}
