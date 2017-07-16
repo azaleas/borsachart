@@ -27,7 +27,7 @@ class ChartsViewSet(viewsets.ViewSet):
     @list_route(methods=['post', 'get'])
     def searchticker(self, request):
         if request.method == 'GET':
-            r.flushall()
+            # r.flushall()
             return Response('Search for ticker...', status.HTTP_200_OK)
         else:
             serializer = TickerSerializer(data=request.data)
