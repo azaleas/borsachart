@@ -8,7 +8,7 @@ import InputComponent from './../components/InputComponent';
 
 const WebSocket = require('reconnecting-websocket');
 
-const ws_scheme = window.location.protocol === 'https' ? 'wss' : 'ws';
+const ws_scheme = window.location.protocol === 'https:' ? 'wss' : 'ws';
 const ws_path = ws_scheme + '://' + VARIABLES.URL;
 const ws = new WebSocket(ws_path);
 
