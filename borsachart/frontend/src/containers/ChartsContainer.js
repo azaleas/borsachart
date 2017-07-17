@@ -10,7 +10,7 @@ const WebSocket = require('reconnecting-websocket');
 
 const ws_scheme = window.location.protocol === 'https:' ? 'wss' : 'ws';
 const ws_path = ws_scheme + '://' + VARIABLES.URL;
-const ws = new WebSocket(ws_path);
+let ws;
 
 class ChartsContainer extends Component {
     
@@ -26,6 +26,7 @@ class ChartsContainer extends Component {
     }
 
     componentDidMount(){
+        ws = new WebSocket(ws_path);
         ws.addEventListener('message', (event) =>{
             let data = JSON.parse(event.data);
             this.setState({

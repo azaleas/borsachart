@@ -1,22 +1,22 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import App from './../containers/App';
+import NotFound from './../components/NotFound';
 
-describe('App', () => {
+describe('NotFound', () => {
     let wrapper;
 
     beforeEach(() => {
-        wrapper = shallow(<App />);
+        wrapper = shallow(<NotFound />);
     });
 
     it('renders without crashing', () => {
         wrapper;
     });
 
-    it('should have `.container` element', () => {
+    it('should have `.header` element', () => {
         expect(
-            wrapper.find('.container').exists()
+            wrapper.find('.header').exists()
         ).toBe(true);
     });
 });

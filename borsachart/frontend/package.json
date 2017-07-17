@@ -14,8 +14,10 @@
     "universal-cookie": "^2.0.8"
   },
   "devDependencies": {
+    "enzyme": "^2.8.2",
+    "html5-websocket": "^1.0.0",
     "react-scripts": "1.0.7",
-    "enzyme": "^2.8.2"
+    "react-test-renderer": "^15.6.1"
   },
   "scripts": {
     "start": "react-scripts start",
