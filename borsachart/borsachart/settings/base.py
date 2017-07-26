@@ -104,13 +104,13 @@ USE_TZ = True
 
 # React App, for production build
 
-# FRONT_END_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+FRONT_END_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-# REACT_APP_DIR = os.path.join(FRONT_END_DIR, 'frontend')
+REACT_APP_DIR = os.path.join(FRONT_END_DIR, 'frontend')
 
-# STATICFILES_DIRS = [
-#     os.path.join(REACT_APP_DIR, 'build', 'static'),
-# ]
+STATICFILES_DIRS = [
+    os.path.join(REACT_APP_DIR, 'build', 'static'),
+]
 
 
 # Static files (CSS, JavaScript, Images)
