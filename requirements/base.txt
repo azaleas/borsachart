@@ -15,7 +15,7 @@ constantly==15.1.0
 daphne==1.2.0
 Django==1.11.2
 django-debug-toolbar==1.8
-djangorestframework==3.6.3
+djangorestframework==3.11.2
 flower==0.9.1
 idna==2.5
 incremental==17.5.0
