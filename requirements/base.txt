@@ -31,7 +31,7 @@ sqlparse==0.2.3
 tornado==4.2
 Twisted==17.1.0
 txaio==2.7.1
-urllib3==1.21.1
+urllib3==1.26.5
 vine==1.1.3
 whitenoise==3.3.0
 zope.interface==4.4.1
