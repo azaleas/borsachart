@@ -29,7 +29,7 @@ requests==2.17.3
 six==1.10.0
 sqlparse==0.2.3
 tornado==4.2
-Twisted==17.1.0
+Twisted==22.4.0
 txaio==2.7.1
 urllib3==1.21.1
 vine==1.1.3
